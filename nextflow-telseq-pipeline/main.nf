@@ -6,9 +6,7 @@ process Telseq {
     tag { "${person_id}" }
 
     input:
-    val person_id
-    path cram_uri
-    path cram_index_uri
+    tuple val(person_id), path(cram_uri), path(cram_index_uri)
 
     output:
     path "${person_id}_telseq_output.txt"
@@ -34,8 +32,6 @@ workflow {
         }
         .set { input_channel }
 
-    input_channel
-        .into { person_id; cram_uri; cram_index_uri }
 
-    Telseq(person_id, cram_uri, cram_index_uri)
+    Telseq(input_channel)
 }
