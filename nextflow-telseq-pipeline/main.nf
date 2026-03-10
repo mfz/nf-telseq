@@ -8,6 +8,7 @@ process Telseq {
     input:
     tuple val(person_id), path(cram_uri), path(cram_index_uri)
     path reference
+    path reference_fai
 
     output:
     path "${person_id}_telseq_output.txt"
@@ -33,8 +34,9 @@ workflow {
         }
         .set { input_channel }
 
-    reference_ch = Channel.value(params.reference)
+    ref= file(params.reference)
+    ref_fai = file("${params.reference}.fai")
 
 
-    Telseq(input_channel, reference_ch)
+    Telseq(input_channel, ref, ref_fai)
 }
