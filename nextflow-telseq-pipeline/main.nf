@@ -20,7 +20,6 @@ process Telseq {
     samtools view \
       -b -T ${reference} \
       ${cram_uri} \
-      --index ${cram_index_uri} \
     | telseq -r 151 - \
       > ${person_id}_telseq_output.txt
     """
