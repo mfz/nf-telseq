@@ -17,11 +17,8 @@ process Telseq {
 
     script:
     """
-    samtools view \
-      -b -T ${reference} \
-      ${cram_uri} \
-    | telseq -o ${person_id}_telseq_output.txt - 
-    
+    samtools view -b -T ${reference} ${cram_uri} > ${person_id}.bam 
+    telseq -o ${person_id}_telseq_output.txt ${person_id}.bam    
     """
 }
 
