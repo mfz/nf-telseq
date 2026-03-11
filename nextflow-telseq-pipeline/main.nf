@@ -30,8 +30,8 @@ workflow {
         }
         .set { input_channel }
 
-    ref= file(params.reference)
-    ref_fai = file("${params.reference}.fai")
+    ref= params.reference
+    ref_fai = "${params.reference}.fai"
 
 
     Telseq(input_channel, ref, ref_fai)
